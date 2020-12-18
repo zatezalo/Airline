@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import rs.raf.Airline.model.MyUser;
-import rs.raf.Airline.model.authDto.RegisterDto;
+import rs.raf.Airline.model.dto.authDto.RegisterDto;
 import rs.raf.Airline.repositories.UserRepository;
 import rs.raf.Airline.repositories.custom.services.UserService;
 

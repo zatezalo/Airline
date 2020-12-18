@@ -7,9 +7,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import rs.raf.Airline.model.authDto.AuthRequest;
-import rs.raf.Airline.model.authDto.AuthResponse;
-import rs.raf.Airline.model.authDto.RegisterDto;
+import rs.raf.Airline.model.dto.authDto.AuthRequest;
+import rs.raf.Airline.model.dto.authDto.AuthResponse;
+import rs.raf.Airline.model.dto.authDto.RegisterDto;
 import rs.raf.Airline.repositories.custom.services.UserService;
 import rs.raf.Airline.services.MyUserDetailsService;
 import rs.raf.Airline.util.JwtUtil;

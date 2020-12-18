@@ -1,4 +1,4 @@
-package rs.raf.Airline.model.authDto;
+package rs.raf.Airline.model.dto.authDto;
 
 import lombok.Data;
 
