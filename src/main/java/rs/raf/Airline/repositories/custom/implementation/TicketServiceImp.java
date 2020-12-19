@@ -30,12 +30,13 @@ public class TicketServiceImp implements TicketService {
 
     @Override
     public String addTicket(TicketDto ticketDto) {
-        //System.out.println(ticketDto);
         Ticket ticket = new Ticket();
         ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
         ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
         ticket.setDepart(ticketDto.getDepart());
         ticket.setComeBack(ticketDto.getComeBack());
+        ticket.setAvailableCount(ticketDto.getAvailableCount());
+        ticket.setOneWay(ticketDto.getOneWay());
         ticketRepository.save(ticket);
 
         return "Created ticket";
@@ -46,7 +47,6 @@ public class TicketServiceImp implements TicketService {
         List<Ticket> tickets = new ArrayList<Ticket>();
 
         for (Ticket ticket : ticketRepository.findAll()) {
-            //ticket.setTickets(new ArrayList<Ticket>());
             tickets.add(ticket);
         }
         return tickets;

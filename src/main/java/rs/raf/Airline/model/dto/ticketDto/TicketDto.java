@@ -19,6 +19,10 @@ public class TicketDto {
     //@NotNull
     private Date comeBack;
 
+    private Boolean oneWay;
+
+    private Long availableCount;
+
     public Long getCompanyId() {
         return companyId;
     }
@@ -49,5 +53,21 @@ public class TicketDto {
 
     public void setComeBack(Date comeBack) {
         this.comeBack = comeBack;
+    }
+
+    public Boolean getOneWay() {
+        return oneWay;
+    }
+
+    public void setOneWay(Boolean oneWay) {
+        this.oneWay = oneWay;
+    }
+
+    public Long getAvailableCount() {
+        return availableCount;
+    }
+
+    public void setAvailableCount(Long availableCount) {
+        this.availableCount = availableCount;
     }
 }

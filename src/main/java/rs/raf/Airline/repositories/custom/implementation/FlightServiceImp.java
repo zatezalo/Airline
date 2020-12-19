@@ -2,10 +2,7 @@ package rs.raf.Airline.repositories.custom.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.raf.Airline.model.Company;
 import rs.raf.Airline.model.Flight;
-import rs.raf.Airline.model.Ticket;
-import rs.raf.Airline.repositories.CompanyRepository;
 import rs.raf.Airline.repositories.FlightRepository;
 import rs.raf.Airline.repositories.custom.services.FlightService;
 
