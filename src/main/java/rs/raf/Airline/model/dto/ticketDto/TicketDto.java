@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class TicketDto {
+    private Long ticketId;
     //@NotNull
     private Long companyId;
 
@@ -69,5 +70,13 @@ public class TicketDto {
 
     public void setAvailableCount(Long availableCount) {
         this.availableCount = availableCount;
+    }
+
+    public Long getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(Long ticketId) {
+        this.ticketId = ticketId;
     }
 }

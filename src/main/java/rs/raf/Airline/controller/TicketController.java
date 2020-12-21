@@ -26,9 +26,27 @@ public class TicketController {
 
         return ticketService.addTicket(ticketDto);
     }
+    @PutMapping("/editTicket")
+    public String editTicket(@RequestBody TicketDto ticketDto) {
+
+        return ticketService.editTicket(ticketDto);
+    }
 
     @GetMapping("/getAllTickets")
     public List<Ticket> getAllTickets() {
+        /*
+        da prosledimo parameter od niza svih ovih tiketa vratim
+        */
         return ticketService.getAllTickets();
+    }
+
+    @GetMapping("/getTicket/{id}")
+    public Ticket getTicket(@PathVariable("id") Long id) {
+        return ticketService.getTicketById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteTicket(@PathVariable("id") Long id){
+        return ticketService.deletTicket(id);
     }
 }

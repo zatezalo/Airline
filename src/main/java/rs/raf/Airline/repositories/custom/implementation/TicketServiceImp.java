@@ -43,12 +43,40 @@ public class TicketServiceImp implements TicketService {
     }
 
     @Override
+    public String editTicket(TicketDto ticketDto) {
+        Ticket ticket = ticketRepository.findById(ticketDto.getTicketId()).get();
+        System.out.println(ticket);
+        ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
+        ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
+        ticket.setDepart(ticketDto.getDepart());
+        ticket.setComeBack(ticketDto.getComeBack());
+        ticket.setAvailableCount(ticketDto.getAvailableCount());
+        ticket.setOneWay(ticketDto.getOneWay());
+        ticketRepository.save(ticket);
+        System.out.println(ticket);
+        return "Edited ticket";
+    }
+
+    @Override
     public List<Ticket> getAllTickets() {
         List<Ticket> tickets = new ArrayList<Ticket>();
+
+        //ticketRepository.findAllByFlight_Origin_IdAndFlight_Destination_IdAndComeBackAndAndDepart(Long(1),2,null,null)
 
         for (Ticket ticket : ticketRepository.findAll()) {
             tickets.add(ticket);
         }
         return tickets;
+    }
+
+    @Override
+    public Ticket getTicketById(Long id) {
+        return ticketRepository.findById(id).get();
+    }
+
+    @Override
+    public String deletTicket(Long id) {
+        ticketRepository.deleteById(id);
+        return "Deleted Ticket";
     }
 }
