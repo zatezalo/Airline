@@ -1,6 +1,9 @@
 package rs.raf.Airline.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,7 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-@Data
+@Getter
+@Setter
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

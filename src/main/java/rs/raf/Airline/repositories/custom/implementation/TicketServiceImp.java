@@ -1,14 +1,12 @@
 package rs.raf.Airline.repositories.custom.implementation;
 
+import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.raf.Airline.model.Company;
-import rs.raf.Airline.model.Flight;
-import rs.raf.Airline.model.Ticket;
+import rs.raf.Airline.model.*;
+import rs.raf.Airline.model.dto.ticketDto.AddBookingDto;
 import rs.raf.Airline.model.dto.ticketDto.TicketDto;
-import rs.raf.Airline.repositories.CompanyRepository;
-import rs.raf.Airline.repositories.FlightRepository;
-import rs.raf.Airline.repositories.TicketRepository;
+import rs.raf.Airline.repositories.*;
 import rs.raf.Airline.repositories.custom.services.TicketService;
 
 import java.util.ArrayList;
@@ -28,6 +26,12 @@ public class TicketServiceImp implements TicketService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
     @Override
     public String addTicket(TicketDto ticketDto) {
         Ticket ticket = new Ticket();
@@ -40,6 +44,29 @@ public class TicketServiceImp implements TicketService {
         ticketRepository.save(ticket);
 
         return "Created ticket";
+    }
+
+    @Override
+    public String addBooking(AddBookingDto addBookingDto) {
+        System.out.println(addBookingDto);
+        Ticket ticket = ticketRepository.findById(addBookingDto.getTicketId()).get();
+        MyUser user = userRepository.findByUsername(addBookingDto.getUsername());
+        Booking booking = new Booking();
+        booking.setFlight(ticket.getFlight());
+        booking.setTicket(ticket);
+        booking.setUser(user);
+        booking.setAvailable(true);
+        booking.setNumberOfBookings(addBookingDto.getNumberOfTickets());
+        System.out.println(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
+        System.out.println(ticket.getAvailableCount());
+        System.out.println(addBookingDto.getNumberOfTickets());
+        ticket.setAvailableCount(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
+        System.out.println("ID : " + ticket.getId());
+
+        ticketRepository.save(ticket);
+        System.out.println(booking);
+        bookingRepository.save(booking);
+        return "Added Booking";
     }
 
     @Override
