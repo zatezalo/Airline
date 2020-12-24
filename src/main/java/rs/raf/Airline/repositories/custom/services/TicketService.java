@@ -12,6 +12,7 @@ public interface TicketService {
     String addBooking(AddBookingDto addBookingDto);
     String editTicket(TicketDto ticketDto);
     List<Ticket> getAllTickets();
+    List<Ticket> getTicketsByParams();
     Ticket getTicketById(Long id);
     String deletTicket(Long id);
 }

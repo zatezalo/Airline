@@ -87,13 +87,15 @@ public class TicketServiceImp implements TicketService {
     @Override
     public List<Ticket> getAllTickets() {
         List<Ticket> tickets = new ArrayList<Ticket>();
-
-        //ticketRepository.findAllByFlight_Origin_IdAndFlight_Destination_IdAndComeBackAndAndDepart(Long(1),2,null,null)
-
         for (Ticket ticket : ticketRepository.findAll()) {
             tickets.add(ticket);
         }
         return tickets;
+    }
+
+    @Override
+    public List<Ticket> getTicketsByParams() {
+        return null;
     }
 
     @Override
@@ -106,4 +108,6 @@ public class TicketServiceImp implements TicketService {
         ticketRepository.deleteById(id);
         return "Deleted Ticket";
     }
+
+
 }

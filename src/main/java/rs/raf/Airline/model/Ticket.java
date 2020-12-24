@@ -18,7 +18,7 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 

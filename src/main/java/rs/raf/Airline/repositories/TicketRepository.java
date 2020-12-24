@@ -17,4 +17,6 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
             (@RequestParam("originId")Long originId, @RequestParam("destinationId")Long destinationId,
              @RequestParam("comeBack") Date comeBack, @RequestParam("depart") Date depart);
 
+    List<Ticket> findAllByCompany_Id(@RequestParam("companyId") Long companyId);
+
 }
