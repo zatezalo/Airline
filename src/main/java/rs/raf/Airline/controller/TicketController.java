@@ -33,8 +33,6 @@ public class TicketController {
         return ticketService.getTicketById(id);
     }
 
-
-    //@CrossOrigin
     @PostMapping("/addTicket")
     public String addTicket(@RequestBody TicketDto ticketDto) {
         return ticketService.addTicket(ticketDto);

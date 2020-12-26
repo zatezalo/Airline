@@ -72,7 +72,6 @@ public class TicketServiceImp implements TicketService {
     @Override
     public String editTicket(TicketDto ticketDto) {
         Ticket ticket = ticketRepository.findById(ticketDto.getTicketId()).get();
-        System.out.println(ticket);
         ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
         ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
         ticket.setDepart(ticketDto.getDepart());
@@ -80,7 +79,6 @@ public class TicketServiceImp implements TicketService {
         ticket.setAvailableCount(ticketDto.getAvailableCount());
         ticket.setOneWay(ticketDto.getOneWay());
         ticketRepository.save(ticket);
-        System.out.println(ticket);
         return "Edited ticket";
     }
 
