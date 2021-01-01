@@ -13,9 +13,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @CrossOrigin
     @GetMapping("/getUserByUsername")
     public MyUser getUserByUsername(@RequestParam("username") String username) {
         return userRepository.findByUsername(username);
     }
+
 }

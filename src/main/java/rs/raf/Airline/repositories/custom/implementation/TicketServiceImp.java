@@ -48,23 +48,17 @@ public class TicketServiceImp implements TicketService {
 
     @Override
     public String addBooking(AddBookingDto addBookingDto) {
-        System.out.println(addBookingDto);
         Ticket ticket = ticketRepository.findById(addBookingDto.getTicketId()).get();
         MyUser user = userRepository.findByUsername(addBookingDto.getUsername());
         Booking booking = new Booking();
         booking.setFlight(ticket.getFlight());
         booking.setTicket(ticket);
         booking.setUser(user);
-        booking.setAvailable(true);
+        booking.setAvailable(false);
         booking.setNumberOfBookings(addBookingDto.getNumberOfTickets());
-        System.out.println(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
-        System.out.println(ticket.getAvailableCount());
-        System.out.println(addBookingDto.getNumberOfTickets());
-        ticket.setAvailableCount(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
-        System.out.println("ID : " + ticket.getId());
+        //ticket.setAvailableCount(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
 
-        ticketRepository.save(ticket);
-        System.out.println(booking);
+        //ticketRepository.save(ticket);
         bookingRepository.save(booking);
         return "Added Booking";
     }

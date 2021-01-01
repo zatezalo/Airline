@@ -27,12 +27,14 @@ public class Booking {
     private Flight flight;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private MyUser user;
 
     @Column(name = "booking_count")
     private Long numberOfBookings;
+
+
 
     public void setAvailable(Boolean available) {
         isAvailable = available;
@@ -52,5 +54,33 @@ public class Booking {
 
     public void setNumberOfBookings(Long numberOfBookings) {
         this.numberOfBookings = numberOfBookings;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public MyUser getUser() {
+        return user;
+    }
+
+    public Long getNumberOfBookings() {
+        return numberOfBookings;
     }
 }

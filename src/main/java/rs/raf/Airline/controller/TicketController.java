@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import rs.raf.Airline.model.Ticket;
 import rs.raf.Airline.model.dto.ticketDto.AddBookingDto;
 import rs.raf.Airline.model.dto.ticketDto.TicketDto;
-import rs.raf.Airline.repositories.FlightRepository;
 import rs.raf.Airline.repositories.custom.services.TicketService;
-import rs.raf.Airline.repositories.custom.services.UserService;
 
 import java.util.List;
 

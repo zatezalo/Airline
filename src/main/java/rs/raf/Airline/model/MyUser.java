@@ -28,7 +28,7 @@ public class MyUser {
     @Column(name = "user_type")
     private UserType userType;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     public String getUsername() {
