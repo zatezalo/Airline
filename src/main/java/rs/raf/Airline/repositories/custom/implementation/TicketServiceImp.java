@@ -3,6 +3,7 @@ package rs.raf.Airline.repositories.custom.implementation;
 import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rs.raf.Airline.exeptions.ApiRequestException;
 import rs.raf.Airline.model.*;
 import rs.raf.Airline.model.dto.ticketDto.AddBookingDto;
 import rs.raf.Airline.model.dto.ticketDto.TicketDto;
@@ -50,6 +51,8 @@ public class TicketServiceImp implements TicketService {
     public String addBooking(AddBookingDto addBookingDto) {
         Ticket ticket = ticketRepository.findById(addBookingDto.getTicketId()).get();
         MyUser user = userRepository.findByUsername(addBookingDto.getUsername());
+        if(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets() < 0)
+            throw new ApiRequestException("You cannot book more tickets than possible!");
         Booking booking = new Booking();
         booking.setFlight(ticket.getFlight());
         booking.setTicket(ticket);

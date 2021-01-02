@@ -18,7 +18,7 @@ public class AirlineApplication {
 	@Bean public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	@Bean
+	/*@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
 			@Override
@@ -28,5 +28,5 @@ public class AirlineApplication {
 						.allowedMethods("PUT", "DELETE", "GET", "POST");
 			}
 		};
-	}
+	}*/
 }
