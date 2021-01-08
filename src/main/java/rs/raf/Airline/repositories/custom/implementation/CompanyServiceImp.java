@@ -52,6 +52,9 @@ public class CompanyServiceImp implements CompanyService {
     public String deleteCompany(Long id) {
         if(companyRepository.findById(id) == null)
             throw new ApiRequestException("No company with that ID!");
+        List<Ticket> tickets = ticketRepository.findAllByCompany_Id(id);
+        for (Ticket t : ticketRepository.findAllByCompany_Id(id))
+            ticketRepository.delete(t);
         companyRepository.deleteById(id);
         return "Company Deleted!!!";
     }
@@ -64,8 +67,9 @@ public class CompanyServiceImp implements CompanyService {
             throw new ApiRequestException("Company name must contain only letters and numbers");
         Company company = new Company();
         company.setName(addCompanyDto.getName());
-        companyRepository.save(company);
-        return "Company Created!!!";
+        //companyRepository.save(company);
+        throw new ApiRequestException("Company made");
+        //return "Company Created!!!";
     }
 
     @Override

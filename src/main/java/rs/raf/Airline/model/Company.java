@@ -1,8 +1,10 @@
 package rs.raf.Airline.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -15,6 +17,10 @@ public class Company {
 
     @Column(name = "name")
     private String name;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
 
     public Long getId() {
         return id;

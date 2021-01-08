@@ -38,6 +38,8 @@ public class TicketServiceImp implements TicketService {
         Ticket ticket = new Ticket();
         ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
         ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
+        if(ticketDto.getComeBack().before(ticketDto.getDepart()))
+            throw new ApiRequestException("Come Back date must be after depart date!");
         ticket.setDepart(ticketDto.getDepart());
         ticket.setComeBack(ticketDto.getComeBack());
         ticket.setAvailableCount(ticketDto.getAvailableCount());

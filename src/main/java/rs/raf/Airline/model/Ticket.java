@@ -18,7 +18,8 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(orphanRemoval = true)
+    //@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private Company company;
 
@@ -37,6 +38,7 @@ public class Ticket {
 
     @Column(name = "available_count")
     private Long availableCount;
+
 
     public Long getId() {
         return id;
