@@ -2,6 +2,7 @@ package rs.raf.Airline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,7 +43,6 @@ public class AuthController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword()));
         } catch (Exception e){
-            //e.printStackTrace();
             throw new ApiRequestException("Wrong password or username!");
         }
 
@@ -51,10 +51,17 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails)));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
     public String register(@Validated @RequestBody RegisterDto registerDto) {
         if(registerDto.getUsername().length() == 0 || registerDto.getUsername().equals(""))
             throw new ApiRequestException("The username can't be null!");
+
+        if(registerDto.getPassword().length() == 0 || registerDto.getPassword().equals(""))
+            throw new ApiRequestException("The password can't be null!");
+
+        if(registerDto.getUserType().equals(null) || registerDto.getUserType().equals(""))
+            throw new ApiRequestException("The user type can't be null!");
 
         if(userRepository.findByUsername(registerDto.getUsername()) != null)
             throw new ApiRequestException("The username is taken!");

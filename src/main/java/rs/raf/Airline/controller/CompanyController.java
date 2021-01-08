@@ -1,7 +1,9 @@
 package rs.raf.Airline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import rs.raf.Airline.exeptions.ApiRequestException;
 import rs.raf.Airline.model.Company;
 import rs.raf.Airline.model.dto.companyDto.AddCompanyDto;
 import rs.raf.Airline.model.dto.companyDto.CompanyDto;
@@ -33,13 +35,19 @@ public class CompanyController {
         return companyService.deleteCompany(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addCompany")
-    public String addCompany(@RequestBody AddCompanyDto addAndEditCompanyDto){
-        return companyService.addCompany(addAndEditCompanyDto);
+    public String addCompany(@RequestBody AddCompanyDto addCompanyDto){
+        if(addCompanyDto.getName().length() > 0 || addCompanyDto.getName().equals(""))
+            throw new ApiRequestException("The company name can't be null!");
+        return companyService.addCompany(addCompanyDto);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/editCompany")
     public String editCompany(@RequestBody EditCompanyDto editCompanyDto) {
+        if(editCompanyDto.getName().length() > 0 || editCompanyDto.getName().equals(""))
+            throw new ApiRequestException("The company name can't be null!");
         return companyService.editCompany(editCompanyDto);
     }
 }

@@ -13,7 +13,6 @@ import rs.raf.Airline.repositories.custom.services.TicketService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -39,8 +38,6 @@ public class TicketServiceImp implements TicketService {
         Ticket ticket = new Ticket();
         ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
         ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
-        if(ticketDto.getComeBack().before(ticketDto.getDepart()))
-            throw new ApiRequestException("Come Back date must be after depart date!");
         ticket.setDepart(ticketDto.getDepart());
         ticket.setComeBack(ticketDto.getComeBack());
         ticket.setAvailableCount(ticketDto.getAvailableCount());
@@ -62,9 +59,6 @@ public class TicketServiceImp implements TicketService {
         booking.setUser(user);
         booking.setAvailable(false);
         booking.setNumberOfBookings(addBookingDto.getNumberOfTickets());
-        //ticket.setAvailableCount(ticket.getAvailableCount() - addBookingDto.getNumberOfTickets());
-
-        //ticketRepository.save(ticket);
         bookingRepository.save(booking);
         return "Added Booking";
     }
@@ -72,8 +66,12 @@ public class TicketServiceImp implements TicketService {
     @Override
     public String editTicket(TicketDto ticketDto) {
         Ticket ticket = ticketRepository.findById(ticketDto.getTicketId()).get();
-        ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
-        ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
+        if(ticket == null)
+            throw new ApiRequestException("No ticket with that id!");
+        if(ticketDto.getCompanyId() != null)
+            ticket.setCompany(companyRepository.findById(ticketDto.getCompanyId()).get());
+        if(ticketDto.getFlightId() != null)
+            ticket.setFlight(flightRepository.findById(ticketDto.getFlightId()).get());
         ticket.setDepart(ticketDto.getDepart());
         ticket.setComeBack(ticketDto.getComeBack());
         ticket.setAvailableCount(ticketDto.getAvailableCount());
@@ -96,7 +94,6 @@ public class TicketServiceImp implements TicketService {
         List<Ticket> tickets = ticketRepository
                 .findAllByFlight_Origin_IdAndFlight_Destination_IdAndComeBackAndAndDepart(
                         searchDto.getOrigin(),searchDto.getDestination(),searchDto.getComeBack(), searchDto.getDepart());
-        System.out.println("Here" + tickets.size());
         return tickets;
     }
 
