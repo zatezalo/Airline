@@ -16,7 +16,6 @@ public class BookingController {
 
     @DeleteMapping("/{id}")
     public String deleteBooking(@PathVariable("id") Long id) {
-        //System.out.println(id);
         userService.deleteBooking(id);
         return "Booking deleted!!!";
     }

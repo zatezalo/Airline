@@ -28,13 +28,7 @@ public class TicketController {
 
     @PostMapping("/searchTickets")
     public List<Ticket> searchTickets(@RequestBody SearchDto searchDto) {
-        System.out.println("radi");
-        System.out.println(searchDto.getDestination());
-        System.out.println(searchDto.getOrigin());
-        System.out.println(searchDto.getDepart());
-        System.out.println(searchDto.getComeBack());
-        return null;
-        //return ticketService.getTicketsByParams();
+        return ticketService.getTicketsByParams(searchDto);
     }
 
     @GetMapping("/getTicket/{id}")

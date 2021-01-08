@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import rs.raf.Airline.exeptions.ApiRequestException;
 import rs.raf.Airline.model.*;
 import rs.raf.Airline.model.dto.ticketDto.AddBookingDto;
+import rs.raf.Airline.model.dto.ticketDto.SearchDto;
 import rs.raf.Airline.model.dto.ticketDto.TicketDto;
 import rs.raf.Airline.repositories.*;
 import rs.raf.Airline.repositories.custom.services.TicketService;
@@ -91,8 +92,12 @@ public class TicketServiceImp implements TicketService {
     }
 
     @Override
-    public List<Ticket> getTicketsByParams() {
-        return null;
+    public List<Ticket> getTicketsByParams(SearchDto searchDto) {
+        List<Ticket> tickets = ticketRepository
+                .findAllByFlight_Origin_IdAndFlight_Destination_IdAndComeBackAndAndDepart(
+                        searchDto.getOrigin(),searchDto.getDestination(),searchDto.getComeBack(), searchDto.getDepart());
+        System.out.println("Here" + tickets.size());
+        return tickets;
     }
 
     @Override
