@@ -67,9 +67,8 @@ public class CompanyServiceImp implements CompanyService {
             throw new ApiRequestException("Company name must contain only letters and numbers");
         Company company = new Company();
         company.setName(addCompanyDto.getName());
-        //companyRepository.save(company);
+
         throw new ApiRequestException("Company made");
-        //return "Company Created!!!";
     }
 
     @Override

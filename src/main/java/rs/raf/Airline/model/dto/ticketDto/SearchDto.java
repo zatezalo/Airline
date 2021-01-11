@@ -10,20 +10,4 @@ public class SearchDto {
     private Long origin;
     private Date comeBack;
     private Date depart;
-
-    public Long getDestination() {
-        return destination;
-    }
-
-    public Long getOrigin() {
-        return origin;
-    }
-
-    public Date getComeBack() {
-        return comeBack;
-    }
-
-    public Date getDepart() {
-        return depart;
-    }
 }

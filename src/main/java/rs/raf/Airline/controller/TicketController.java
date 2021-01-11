@@ -10,8 +10,6 @@ import rs.raf.Airline.model.dto.ticketDto.SearchDto;
 import rs.raf.Airline.model.dto.ticketDto.TicketDto;
 import rs.raf.Airline.repositories.custom.services.TicketService;
 
-import javax.xml.crypto.Data;
-import java.util.Date;
 import java.util.List;
 
 
@@ -58,7 +56,6 @@ public class TicketController {
 
     @PostMapping("/addBooking")
     public String addBooking(@RequestBody AddBookingDto addBookingDto) {
-        //System.out.println(addBookingDto);
         return ticketService.addBooking(addBookingDto);
     }
 

@@ -3,7 +3,6 @@ package rs.raf.Airline.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rs.raf.Airline.model.dto.bookingDto.BookingDto;
-import rs.raf.Airline.repositories.BookingRepository;
 import rs.raf.Airline.repositories.custom.services.UserService;
 
 @CrossOrigin("http://localhost:4200")
